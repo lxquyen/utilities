@@ -3,6 +3,7 @@ package com.steve.utilities.common.di.component
 import android.app.Application
 import com.steve.utilities.common.di.module.AppModule
 import com.steve.utilities.presentation.MainFragment
+import com.steve.utilities.presentation.customviews.sudoku.SudokuGameFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -13,6 +14,7 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(mainFragment: MainFragment)
+    fun inject(sudokuGameFragment: SudokuGameFragment)
 
     @Component.Builder
     interface Builder {

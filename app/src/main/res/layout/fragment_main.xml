@@ -1,10 +1,13 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/app_name" />
-</FrameLayout>
+    <Button
+        android:id="@+id/btn_custom_view"
+        style="@style/Button.Menu"
+        android:text="@string/menu_custom_view" />
+
+</LinearLayout>

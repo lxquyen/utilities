@@ -1,24 +1,19 @@
 package com.steve.utilities.presentation
 
-import android.app.Application
-import android.content.Context
+import android.view.View
 import com.steve.utilities.R
 import com.steve.utilities.common.base.BaseFragment
 import com.steve.utilities.common.base.BasePresenter
 import com.steve.utilities.common.di.component.AppComponent
+import com.steve.utilities.common.extensions.startActivity
+import com.steve.utilities.presentation.customviews.sudoku.SudokuGameFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
-class MainFragment : BaseFragment<MainView, MainPresenter>(), MainView {
+class MainFragment : BaseFragment<MainView, MainPresenter>(), MainView, View.OnClickListener {
 
     @Inject
     lateinit var presenter: MainPresenter
-
-    @Inject
-    lateinit var applicationContext : Application
-
-    @Inject
-    lateinit var baseUrl: String
 
     override fun inject(appComponent: AppComponent) {
         appComponent.inject(this)
@@ -37,6 +32,12 @@ class MainFragment : BaseFragment<MainView, MainPresenter>(), MainView {
     }
 
     override fun initView() {
-        tv.text = baseUrl
+        btn_custom_view.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_custom_view -> context?.startActivity(SudokuGameFragment::class.java)
+        }
     }
 }
