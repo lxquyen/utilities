@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SudokuBoardView">
-        <attr name="lineColor" format="color" />
+        <attr name="lineColorPrimary" format="color" />
+        <attr name="lineColorSecondary" format="color" />
+
+        <attr name="lineStrokePrimary" format="dimension" />
+        <attr name="lineStrokeSecondary" format="dimension" />
+
+        <attr name="boardColor" format="color" />
+        <attr name="backgroundSelectedColor" format="color" />
     </declare-styleable>
 </resources>

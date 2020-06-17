@@ -6,5 +6,10 @@
     <com.steve.utilities.common.widget.SudokuBoardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lineColor="#B82222" />
+        android:layout_margin="20dp"
+        app:backgroundSelectedColor="#dddd00"
+        app:boardColor="#e8f4f4"
+        app:lineColorPrimary="#0000ff"
+        app:lineColorSecondary="#aaaadd"
+        app:lineStrokePrimary="2dp" />
 </FrameLayout>
