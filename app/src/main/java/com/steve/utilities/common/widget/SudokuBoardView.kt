@@ -16,6 +16,7 @@ import com.steve.utilities.domain.model.Cell
 import timber.log.Timber
 
 class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
+    var listener: SudokuBoardViewListener? = null
     private var board = context?.readGameBoards()
 
     private var cellWidth = 0f
@@ -80,11 +81,14 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                     ?: -1
                 val y = (0 until 9).firstOrNull { e.y > it * cellHeight && e.y < (it + 1) * cellHeight }
                     ?: -1
-                val cell = board?.get(x, y)
-                if (cell?.isEditable == true)
+                val cell = board?.get(x, y) ?: return false
+                if (cell.isEditable) {
+                    listener?.onNumberEditableClicked(cell.value)
                     updateSelectedPoint(x, y)
-                else
+                } else {
+                    listener?.onNumberUnEditableClicked(cell.value)
                     findAllTheSameCell(cell)
+                }
                 return false
             }
         })
@@ -169,7 +173,7 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
             numberPaint.getTextBounds(text, 0, text.length, textBound)
             val x = row * cellWidth + cellWidth / 2
             val y = col * cellHeight + (cellHeight + textBound.height()) / 2
-            numberPaint.color = if(cell?.isEditable == true) textColorSecondary else textColorPrimary
+            numberPaint.color = if (cell?.isEditable == true) textColorSecondary else textColorPrimary
             canvas?.drawText(text, x, y, numberPaint)
         }
 
@@ -245,8 +249,20 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         invalidate()
     }
 
-    private fun Point.isNull(): Boolean {
-        return this.x == -1 || this.y == -1
+    fun restart() {
+        board?.forEach {
+            if (it?.isEditable == true) it.value = 0
+        }
+        invalidate()
     }
 
+    interface SudokuBoardViewListener {
+        fun onNumberUnEditableClicked(number: Int)
+        fun onNumberEditableClicked(number: Int)
+    }
+
+}
+
+private fun Point.isNull(): Boolean {
+    return this.x == -1 || this.y == -1
 }
