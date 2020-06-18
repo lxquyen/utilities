@@ -2,20 +2,25 @@ package com.steve.utilities.common.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Point
+import android.graphics.*
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import com.steve.utilities.R
+import com.steve.utilities.common.extensions.readGameBoards
+import com.steve.utilities.core.extensions.Array2D
+import com.steve.utilities.domain.model.Cell
+import timber.log.Timber
 
 class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
+    private var board = context?.readGameBoards()
 
     private var cellWidth = 0f
     private var cellHeight = 0f
+    private var numberLeft = 0f
+    private var numberTop = 0f
 
     private var boardColor = 0
     private var backgroundSelectedColor = 0
@@ -26,6 +31,7 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
     private var lineStrokePrimary = 0f
     private var lineStrokeSecondary = 0f
 
+    //region #Paint
     private val linePaint: Paint by lazy {
         return@lazy Paint(Paint.ANTI_ALIAS_FLAG)
             .apply {
@@ -42,8 +48,21 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
             color = Color.YELLOW
         }
     }
+    private val numberPaint: TextPaint by lazy {
+        return@lazy TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.BLACK
+            textAlign = Paint.Align.CENTER
+        }
+    }
+    //endregion
 
     private val selectedPoint = Point(-1, -1)
+    private var textSize = 0f
+        set(value) {
+            field = value
+            numberPaint.textSize = value
+        }
+    private val textBound = Rect()
 
     private val gestureDetector: GestureDetector by lazy {
         return@lazy GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
@@ -52,7 +71,9 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                     ?: -1
                 val y = (0 until 9).firstOrNull { e.y > it * cellHeight && e.y < (it + 1) * cellHeight }
                     ?: -1
-                updateSelectedPoint(x, y)
+                val cell = board?.get(x, y)
+                if (cell?.isEditable == true)
+                    updateSelectedPoint(x, y)
                 return false
             }
         })
@@ -84,6 +105,7 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
 
         cellWidth = (min - paddingLeft - paddingRight) / 9f
         cellHeight = (min - paddingTop - paddingBottom) / 9f
+        textSize = cellWidth * 0.6f
 
         super.onMeasure(MeasureSpec.makeMeasureSpec(min, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(min, MeasureSpec.EXACTLY))
     }
@@ -114,6 +136,16 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                 val bottom = top + cellHeight
                 canvas?.drawRect(left, top, right, bottom, selectPaint)
             }
+        }
+
+        //Draw Number
+        Array2D(9, 9) { row, col ->
+            val cell = board?.get(row, col)
+            val text = if (cell?.value != 0) cell?.value.toString() else ""
+            numberPaint.getTextBounds(text, 0, text.length, textBound)
+            val x = row * cellWidth + cellWidth / 2
+            val y = col * cellHeight + (cellHeight + textBound.height()) / 2
+            canvas?.drawText(text, x, y, numberPaint)
         }
 
         //Draw lines
