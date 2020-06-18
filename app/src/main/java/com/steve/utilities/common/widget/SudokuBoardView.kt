@@ -48,6 +48,13 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
             color = Color.YELLOW
         }
     }
+    private val selectUnEditablePaint: Paint by lazy {
+        return@lazy Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.RED
+            style = Paint.Style.STROKE
+            strokeWidth = 5f
+        }
+    }
     private val numberPaint: TextPaint by lazy {
         return@lazy TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.BLACK
@@ -57,6 +64,7 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
     //endregion
 
     private val selectedPoint = Point(-1, -1)
+    private val sameCells = mutableListOf<Cell>()
     private var textSize = 0f
         set(value) {
             field = value
@@ -74,6 +82,8 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                 val cell = board?.get(x, y)
                 if (cell?.isEditable == true)
                     updateSelectedPoint(x, y)
+                else
+                    findAllThemSameCell(cell)
                 return false
             }
         })
@@ -137,6 +147,16 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                 canvas?.drawRect(left, top, right, bottom, selectPaint)
             }
         }
+        //Draw Background of Same Cell
+        run {
+            sameCells.forEach { cell ->
+                val left = cell.x * cellWidth + lineStrokeSecondary
+                val top = cell.y * cellHeight + lineStrokeSecondary
+                val right = left + cellWidth - lineStrokeSecondary * 2
+                val bottom = top + cellHeight - lineStrokeSecondary * 2
+                canvas?.drawRect(left, top, right, bottom, selectUnEditablePaint)
+            }
+        }
 
         //Draw Number
         Array2D(9, 9) { row, col ->
@@ -175,12 +195,23 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     private fun updateSelectedPoint(x: Int, y: Int) {
+        sameCells.clear()
         if (selectedPoint.x == x && selectedPoint.y == y) {
             selectedPoint.set(-1, -1)
             invalidate()
             return
         }
         selectedPoint.set(x, y)
+        invalidate()
+    }
+
+    private fun findAllThemSameCell(cellInput: Cell?) {
+        sameCells.clear()
+        board?.forEachIndexed { _, _, cell ->
+            if (cell != null && cell.value == cellInput?.value) {
+                sameCells.add(cell)
+            }
+        }
         invalidate()
     }
 
