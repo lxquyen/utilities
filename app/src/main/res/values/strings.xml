@@ -11,4 +11,12 @@
     <string name="number_seven">7</string>
     <string name="number_eight">8</string>
     <string name="number_nine">9</string>
+    <string name="undo">Undo</string>
+    <string name="restart">Restart</string>
+    <string name="delete">X</string>
+    <string name="difficulty">Difficulty:</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="very_hard">Very Hard</string>
 </resources>

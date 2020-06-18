@@ -13,14 +13,13 @@ import com.steve.utilities.R
 import com.steve.utilities.common.extensions.readGameBoards
 import com.steve.utilities.core.extensions.Array2D
 import com.steve.utilities.domain.model.Cell
+import timber.log.Timber
 
 class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     private var board = context?.readGameBoards()
 
     private var cellWidth = 0f
     private var cellHeight = 0f
-    private var numberLeft = 0f
-    private var numberTop = 0f
 
     private var boardColor = 0
     private var backgroundSelectedColor = 0
@@ -30,6 +29,9 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
 
     private var lineStrokePrimary = 0f
     private var lineStrokeSecondary = 0f
+
+    private var textColorPrimary = 0
+    private var textColorSecondary = 0
 
     //region #Paint
     private val linePaint: Paint by lazy {
@@ -57,7 +59,6 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
     private val numberPaint: TextPaint by lazy {
         return@lazy TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.BLACK
             textAlign = Paint.Align.CENTER
         }
     }
@@ -102,6 +103,9 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                 lineColorSecondary = it.getColor(R.styleable.SudokuBoardView_lineColorSecondary, Color.BLACK)
                 lineStrokePrimary = it.getDimension(R.styleable.SudokuBoardView_lineStrokePrimary, 10f)
                 lineStrokeSecondary = it.getDimension(R.styleable.SudokuBoardView_lineStrokeSecondary, 5f)
+
+                textColorPrimary = it.getColor(R.styleable.SudokuBoardView_textCellColorPrimary, Color.BLACK)
+                textColorSecondary = it.getColor(R.styleable.SudokuBoardView_textCellColorSecondary, Color.GREEN)
                 return@let it
             }
             .recycle()
@@ -165,6 +169,7 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
             numberPaint.getTextBounds(text, 0, text.length, textBound)
             val x = row * cellWidth + cellWidth / 2
             val y = col * cellHeight + (cellHeight + textBound.height()) / 2
+            numberPaint.color = if(cell?.isEditable == true) textColorSecondary else textColorPrimary
             canvas?.drawText(text, x, y, numberPaint)
         }
 
@@ -226,6 +231,22 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
             value = button.text.toString().toInt()
         }
         findAllTheSameCell(cell)
+    }
+
+    fun drawNumber(number: String?) {
+        if (selectedPoint.isNull()) return
+        board?.get(selectedPoint.x, selectedPoint.y)?.value = number?.toInt() ?: 0
+        invalidate()
+    }
+
+    fun delete() {
+        if (selectedPoint.isNull()) return
+        board?.get(selectedPoint.x, selectedPoint.y)?.value = 0
+        invalidate()
+    }
+
+    private fun Point.isNull(): Boolean {
+        return this.x == -1 || this.y == -1
     }
 
 }

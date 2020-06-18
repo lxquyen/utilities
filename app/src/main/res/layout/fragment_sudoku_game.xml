@@ -7,15 +7,38 @@
     android:orientation="vertical"
     android:showDividers="middle">
 
-    <com.steve.utilities.common.widget.SudokuBoardView
-        android:id="@+id/boardView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:backgroundSelectedColor="#dddd00"
-        app:boardColor="#e8f4f4"
-        app:lineColorPrimary="#0000ff"
-        app:lineColorSecondary="#aaaadd"
-        app:lineStrokePrimary="3dp" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/difficulty"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/tvLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/easy"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#85c6b7" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <Chronometer
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_timer_black_24dp"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,49 +93,117 @@
             android:text="@string/number_nine" />
     </LinearLayout>
 
+    <com.steve.utilities.common.widget.SudokuBoardView
+        android:id="@+id/boardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundSelectedColor="#dddd00"
+        app:boardColor="#e8f4f4"
+        app:lineColorPrimary="#0000ff"
+        app:lineColorSecondary="#aaaadd"
+        app:textCellColorPrimary="#000000"
+        app:textCellColorSecondary="#2cb254"
+        app:lineStrokePrimary="3dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_horizontal"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/btn_easy"
+            style="@style/Button.Level"
+            android:backgroundTint="#2cb254"
+            android:text="@string/easy" />
+
+        <TextView
+            android:id="@+id/btn_medium"
+            style="@style/Button.Level"
+            android:backgroundTint="#3767ce"
+            android:text="@string/medium" />
+
+        <TextView
+            android:id="@+id/btn_hard"
+            style="@style/Button.Level"
+            android:backgroundTint="#bf3ebf"
+            android:text="@string/hard" />
+
+        <TextView
+            android:id="@+id/btn_very_hard"
+            style="@style/Button.Level"
+            android:backgroundTint="#b93737"
+            android:text="@string/very_hard" />
+    </LinearLayout>
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:columnCount="3"
         android:orientation="vertical"
-        android:rowCount="3">
+        android:rowCount="4">
 
         <TextView
+            android:id="@+id/key_one"
             style="@style/Button.Key"
             android:text="@string/number_one" />
 
         <TextView
-            style="@style/Button.Key"
-            android:text="@string/number_two" />
-
-        <TextView
-            style="@style/Button.Key"
-            android:text="@string/number_three" />
-
-        <TextView
+            android:id="@+id/key_four"
             style="@style/Button.Key"
             android:text="@string/number_four" />
 
         <TextView
-            style="@style/Button.Key"
-            android:text="@string/number_five" />
-
-        <TextView
-            style="@style/Button.Key"
-            android:text="@string/number_six" />
-
-        <TextView
+            android:id="@+id/key_seven"
             style="@style/Button.Key"
             android:text="@string/number_seven" />
 
         <TextView
+            android:id="@+id/key_undo"
+            style="@style/Button.Action"
+            android:text="@string/undo" />
+
+        <TextView
+            android:id="@+id/key_two"
+            style="@style/Button.Key"
+            android:text="@string/number_two" />
+
+        <TextView
+            android:id="@+id/key_five"
+            style="@style/Button.Key"
+            android:text="@string/number_five" />
+
+        <TextView
+            android:id="@+id/key_eight"
             style="@style/Button.Key"
             android:text="@string/number_eight" />
 
         <TextView
+            android:id="@+id/key_restart"
+            style="@style/Button.Action"
+            android:text="@string/restart" />
+
+        <TextView
+            android:id="@+id/key_three"
+            style="@style/Button.Key"
+            android:text="@string/number_three" />
+
+        <TextView
+            android:id="@+id/key_six"
+            style="@style/Button.Key"
+            android:text="@string/number_six" />
+
+        <TextView
+            android:id="@+id/key_nine"
             style="@style/Button.Key"
             android:text="@string/number_nine" />
+
+        <TextView
+            android:id="@+id/key_delete"
+            style="@style/Button.Key"
+            android:text="@string/delete" />
     </GridLayout>
 
 </LinearLayout>

@@ -9,5 +9,8 @@
 
         <attr name="boardColor" format="color" />
         <attr name="backgroundSelectedColor" format="color" />
+
+        <attr name="textCellColorPrimary" format="color" />
+        <attr name="textCellColorSecondary" format="color" />
     </declare-styleable>
 </resources>

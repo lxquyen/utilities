@@ -16,6 +16,17 @@ class SudokuGameFragment : BaseFragment<SudokuGameView, SudokuGamePresenter>(), 
         R.id.btn_four, R.id.btn_five, R.id.btn_six,
         R.id.btn_seven, R.id.btn_eight, R.id.btn_nine)
 
+    private val keyIds = mutableListOf(
+        R.id.key_one, R.id.key_two, R.id.key_three,
+        R.id.key_four, R.id.key_five, R.id.key_six,
+        R.id.key_seven, R.id.key_eight, R.id.key_nine,
+        R.id.key_undo, R.id.key_restart, R.id.key_delete
+    )
+
+    private val levelIds = mutableListOf(
+        R.id.btn_easy, R.id.btn_medium, R.id.btn_hard, R.id.btn_very_hard
+    )
+
     @Inject
     lateinit var presenter: SudokuGamePresenter
 
@@ -37,6 +48,8 @@ class SudokuGameFragment : BaseFragment<SudokuGameView, SudokuGamePresenter>(), 
 
     override fun initView() {
         buttonIds.forEach { this@SudokuGameFragment.view?.findViewById<TextView>(it)?.setOnClickListener(this) }
+        keyIds.forEach { this@SudokuGameFragment.view?.findViewById<TextView>(it)?.setOnClickListener(this) }
+        levelIds.forEach { this@SudokuGameFragment.view?.findViewById<TextView>(it)?.setOnClickListener(this) }
     }
 
     override fun onClick(v: View) {
@@ -49,7 +62,31 @@ class SudokuGameFragment : BaseFragment<SudokuGameView, SudokuGamePresenter>(), 
             }
             button?.isSelected = isSelected
         }
+
+        when (v.id) {
+            R.id.key_undo -> undo()
+            R.id.key_restart -> restart()
+            R.id.key_delete -> boardView.delete()
+        }
+
+        keyIds.forEach {
+            if (it == R.id.key_undo || it == R.id.key_restart || it == R.id.key_delete) {
+                return@forEach
+            }
+            if (it == v.id) {
+                val numberTV = view?.findViewById<TextView>(it)
+                boardView.drawNumber(numberTV?.text?.toString())
+            }
+        }
         toggleHighLightBoard()
+    }
+
+    private fun restart() {
+
+    }
+
+    private fun undo() {
+
     }
 
     private fun toggleHighLightBoard() {
