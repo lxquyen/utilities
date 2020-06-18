@@ -20,4 +20,24 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Button</item>
     </style>
 
+    <style name="Button.Number">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/selector_number_background</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Button</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Button.Key">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

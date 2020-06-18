@@ -1,15 +1,118 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:divider="@drawable/divider_vertical"
+    android:orientation="vertical"
+    android:showDividers="middle">
 
     <com.steve.utilities.common.widget.SudokuBoardView
+        android:id="@+id/boardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         app:backgroundSelectedColor="#dddd00"
         app:boardColor="#e8f4f4"
         app:lineColorPrimary="#0000ff"
         app:lineColorSecondary="#aaaadd"
         app:lineStrokePrimary="3dp" />
-</FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_horizontal"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <com.steve.utilities.common.widget.SquareTextView
+            android:id="@+id/btn_one"
+            style="@style/Button.Number"
+            android:text="@string/number_one" />
+
+        <com.steve.utilities.common.widget.SquareTextView
+            android:id="@+id/btn_two"
+            style="@style/Button.Number"
+            android:text="@string/number_two" />
+
+        <com.steve.utilities.common.widget.SquareTextView
+            android:id="@+id/btn_three"
+            style="@style/Button.Number"
+            android:text="@string/number_three" />
+
+        <com.steve.utilities.common.widget.SquareTextView
+            android:id="@+id/btn_four"
+            style="@style/Button.Number"
+            android:text="@string/number_four" />
+
+        <com.steve.utilities.common.widget.SquareTextView
+            android:id="@+id/btn_five"
+            style="@style/Button.Number"
+            android:text="@string/number_five" />
+
+        <com.steve.utilities.common.widget.SquareTextView
+            android:id="@+id/btn_six"
+            style="@style/Button.Number"
+            android:text="@string/number_six" />
+
+        <com.steve.utilities.common.widget.SquareTextView
+            android:id="@+id/btn_seven"
+            style="@style/Button.Number"
+            android:text="@string/number_seven" />
+
+        <com.steve.utilities.common.widget.SquareTextView
+            android:id="@+id/btn_eight"
+            style="@style/Button.Number"
+            android:text="@string/number_eight" />
+
+        <com.steve.utilities.common.widget.SquareTextView
+            android:id="@+id/btn_nine"
+            style="@style/Button.Number"
+            android:text="@string/number_nine" />
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:columnCount="3"
+        android:orientation="vertical"
+        android:rowCount="3">
+
+        <TextView
+            style="@style/Button.Key"
+            android:text="@string/number_one" />
+
+        <TextView
+            style="@style/Button.Key"
+            android:text="@string/number_two" />
+
+        <TextView
+            style="@style/Button.Key"
+            android:text="@string/number_three" />
+
+        <TextView
+            style="@style/Button.Key"
+            android:text="@string/number_four" />
+
+        <TextView
+            style="@style/Button.Key"
+            android:text="@string/number_five" />
+
+        <TextView
+            style="@style/Button.Key"
+            android:text="@string/number_six" />
+
+        <TextView
+            style="@style/Button.Key"
+            android:text="@string/number_seven" />
+
+        <TextView
+            style="@style/Button.Key"
+            android:text="@string/number_eight" />
+
+        <TextView
+            style="@style/Button.Key"
+            android:text="@string/number_nine" />
+    </GridLayout>
+
+</LinearLayout>

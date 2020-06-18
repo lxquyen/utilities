@@ -8,11 +8,11 @@ import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import com.steve.utilities.R
 import com.steve.utilities.common.extensions.readGameBoards
 import com.steve.utilities.core.extensions.Array2D
 import com.steve.utilities.domain.model.Cell
-import timber.log.Timber
 
 class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     private var board = context?.readGameBoards()
@@ -83,7 +83,7 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                 if (cell?.isEditable == true)
                     updateSelectedPoint(x, y)
                 else
-                    findAllThemSameCell(cell)
+                    findAllTheSameCell(cell)
                 return false
             }
         })
@@ -205,14 +205,27 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         invalidate()
     }
 
-    private fun findAllThemSameCell(cellInput: Cell?) {
+    private fun findAllTheSameCell(cellInput: Cell?) {
         sameCells.clear()
+        selectedPoint.set(-1, -1)
         board?.forEachIndexed { _, _, cell ->
             if (cell != null && cell.value == cellInput?.value) {
                 sameCells.add(cell)
             }
         }
         invalidate()
+    }
+
+    fun highLightSelectedCell(button: TextView?) {
+        if (button == null) {
+            sameCells.clear()
+            invalidate()
+            return
+        }
+        val cell = Cell().apply {
+            value = button.text.toString().toInt()
+        }
+        findAllTheSameCell(cell)
     }
 
 }
