@@ -5,7 +5,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Point
 import android.util.AttributeSet
+import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import com.steve.utilities.R
@@ -41,6 +43,21 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         }
     }
 
+    private val selectedPoint = Point(-1, -1)
+
+    private val gestureDetector: GestureDetector by lazy {
+        return@lazy GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onSingleTapUp(e: MotionEvent): Boolean {
+                val x = (0 until 9).firstOrNull { e.x > it * cellWidth && e.x < (it + 1) * cellWidth }
+                    ?: -1
+                val y = (0 until 9).firstOrNull { e.y > it * cellHeight && e.y < (it + 1) * cellHeight }
+                    ?: -1
+                updateSelectedPoint(x, y)
+                return false
+            }
+        })
+    }
+
     init {
         setupAttrs(attrs)
     }
@@ -73,7 +90,8 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return super.onTouchEvent(event)
+        gestureDetector.onTouchEvent(event)
+        return true
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -85,34 +103,53 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         canvas?.drawRect(cellWidth * 6, cellWidth * 3, cellWidth * 12, cellHeight * 6, boardPaint)
         canvas?.drawRect(cellWidth * 3, cellWidth * 6, cellWidth * 6, cellHeight * 12, boardPaint)
 
-        //Draw lines
-        (0..9).forEach {
-            val x = it * cellWidth + paddingLeft
-            val y = it * cellHeight + paddingTop
-            canvas?.save()
-
-            canvas?.restore()
-
-            linePaint.apply {
-                color = if (it % 3 == 0) lineColorPrimary else lineColorSecondary
-                strokeWidth = if (it % 3 == 0) lineStrokePrimary else lineStrokeSecondary
+        //Draw Selected background
+        run {
+            val x = selectedPoint.x
+            val y = selectedPoint.y
+            if (x != -1 && y != -1) {
+                val left = x * cellWidth
+                val top = y * cellHeight
+                val right = left + cellWidth
+                val bottom = top + cellHeight
+                canvas?.drawRect(left, top, right, bottom, selectPaint)
             }
-
-            canvas?.drawLine(x, 0f, x, height.toFloat(), linePaint)
-            canvas?.drawLine(0f, y, width.toFloat(), y, linePaint)
-
-
         }
 
-        //Draw Selected background
-        val bgSelectedX = cellWidth * 0f + lineStrokeSecondary
-        val bgSelectedY = cellHeight * 0f + lineStrokeSecondary
-        val bgSelectedWidth = cellWidth - lineStrokeSecondary
-        val bgSelectedHeight = cellHeight - lineStrokeSecondary
+        //Draw lines
+        linePaint.apply {
+            strokeWidth = lineStrokeSecondary
+            color = lineColorSecondary
+        }
+        (1 until 9).forEach {
+            val x = it * cellWidth + paddingLeft
+            val y = it * cellHeight + paddingTop
+            canvas?.drawLine(x, 0f, x, height.toFloat(), linePaint)
+            canvas?.drawLine(0f, y, width.toFloat(), y, linePaint)
+        }
 
-        canvas?.drawRect(bgSelectedX, bgSelectedY, bgSelectedWidth, bgSelectedHeight, selectPaint)
-
+        //Draw border
+        linePaint.apply {
+            strokeWidth = lineStrokePrimary
+            color = lineColorPrimary
+            style = Paint.Style.STROKE
+        }
+        (0..9).filter { it % 3 == 0 }.forEach {
+            val x = it * cellWidth + paddingLeft
+            val y = it * cellHeight + paddingTop
+            canvas?.drawLine(x, 0f, x, height.toFloat(), linePaint)
+            canvas?.drawLine(0f, y, width.toFloat(), y, linePaint)
+        }
     }
 
+    private fun updateSelectedPoint(x: Int, y: Int) {
+        if (selectedPoint.x == x && selectedPoint.y == y) {
+            selectedPoint.set(-1, -1)
+            invalidate()
+            return
+        }
+        selectedPoint.set(x, y)
+        invalidate()
+    }
 
 }

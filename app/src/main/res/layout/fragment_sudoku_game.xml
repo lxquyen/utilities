@@ -11,5 +11,5 @@
         app:boardColor="#e8f4f4"
         app:lineColorPrimary="#0000ff"
         app:lineColorSecondary="#aaaadd"
-        app:lineStrokePrimary="2dp" />
+        app:lineStrokePrimary="3dp" />
 </FrameLayout>
