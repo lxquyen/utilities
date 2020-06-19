@@ -29,4 +29,16 @@ class Array2D<T>(val xSize: Int, val ySize: Int, val array: Array<Array<T>>) {
     inline fun forEachIndexed(operation: (x: Int, y: Int, T) -> Unit) {
         array.forEachIndexed { x, p -> p.forEachIndexed { y, t -> operation.invoke(x, y, t) } }
     }
+
+    inline fun sum(operation: (T) -> Boolean): Int {
+        var sum = 0
+        array.forEach {
+            it.forEach { T ->
+                if (operation.invoke(T)) {
+                    sum++
+                }
+            }
+        }
+        return sum
+    }
 }

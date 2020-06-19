@@ -80,11 +80,6 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
             field = value
             numberPaint.textSize = value
         }
-    private var isShowWarning = false
-        set(value) {
-            field = value
-            invalidate()
-        }
 
     //region# Blink : Warning
     private var warningCells = mutableListOf<Cell>()
@@ -260,7 +255,13 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     fun drawNumber(x: Int, y: Int, number: Int) {
-        board.matrix?.get(x, y)?.value = number
+        board.matrix?.get(x, y)
+            ?.apply {
+                value = number
+            }?.let {
+                selectedCells.add(it)
+            }
+        listener?.onBoardChanged(board.matrix)
         invalidate()
     }
 
@@ -283,6 +284,7 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
     interface SudokuBoardViewListener {
         fun onNumberUnEditableClicked(number: Int)
         fun onNumberEditableClicked(number: Int)
+        fun onBoardChanged(matrix: Array2D<Cell?>?)
     }
 
 }

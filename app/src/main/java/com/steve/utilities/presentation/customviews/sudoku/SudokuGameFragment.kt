@@ -7,6 +7,7 @@ import com.steve.utilities.common.base.BaseFragment
 import com.steve.utilities.common.base.BasePresenter
 import com.steve.utilities.common.di.component.AppComponent
 import com.steve.utilities.common.widget.SudokuBoardView
+import com.steve.utilities.core.extensions.Array2D
 import com.steve.utilities.domain.model.Cell
 import kotlinx.android.synthetic.main.fragment_sudoku_game.*
 import javax.inject.Inject
@@ -95,5 +96,25 @@ class SudokuGameFragment : BaseFragment<SudokuGameView, SudokuGamePresenter>(), 
             val button: TextView? = view?.findViewById(it)
             button?.isSelected = false
         }
+    }
+
+    override fun onBoardChanged(matrix: Array2D<Cell?>?) {
+        (1..9)
+            .map {
+                val sum = matrix?.sum { cell -> cell?.value == it }
+                return@map sum == 9
+            }
+            .forEachIndexed { index, b ->
+                view?.findViewById<TextView>(buttonIds[index])
+                    ?.apply {
+                        if (b) {
+                            isEnabled = false
+                            alpha = 0.1f
+                        } else {
+                            isEnabled = true
+                            alpha = 1f
+                        }
+                    }
+            }
     }
 }
