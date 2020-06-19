@@ -1,7 +1,6 @@
 package com.steve.utilities.domain.model
 
 import com.steve.utilities.core.extensions.Array2D
-import timber.log.Timber
 
 class Board(val matrix: Array2D<Cell?>?) {
 
@@ -21,7 +20,18 @@ class Board(val matrix: Array2D<Cell?>?) {
                 result.add(cellHorizontal)
             }
         }
-        Timber.d("findWrongItem: ${result.size}")
+
+        val startX = x / 3 * 3
+        val startY = y / 3 * 3
+        (startX until startX + 3).forEach { indexX ->
+            (startY until startY + 3).forEach { indexY ->
+                val cellGroup = matrix[indexX, indexY]
+                if (cellGroup?.value == value) {
+                    result.add(cellGroup)
+                }
+            }
+        }
+
         return result
     }
 }
