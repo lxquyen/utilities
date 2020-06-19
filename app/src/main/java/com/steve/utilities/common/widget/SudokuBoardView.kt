@@ -2,22 +2,25 @@ package com.steve.utilities.common.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
+import android.os.SystemClock
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import android.widget.TextView
 import com.steve.utilities.R
 import com.steve.utilities.common.extensions.readGameBoards
 import com.steve.utilities.core.extensions.Array2D
+import com.steve.utilities.domain.model.Board
 import com.steve.utilities.domain.model.Cell
-import timber.log.Timber
 
 class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     var listener: SudokuBoardViewListener? = null
-    private var board = context?.readGameBoards()
+    private var board = Board(context?.readGameBoards())
 
     private var cellWidth = 0f
     private var cellHeight = 0f
@@ -63,15 +66,49 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
             textAlign = Paint.Align.CENTER
         }
     }
+    private val warningPaint: Paint by lazy {
+        return@lazy Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.RED
+        }
+    }
     //endregion
 
-    private val selectedPoint = Point(-1, -1)
-    private val sameCells = mutableListOf<Cell>()
+    private val selectedCells = mutableListOf<Cell>()
+    private var inputCell: Cell? = null
     private var textSize = 0f
         set(value) {
             field = value
             numberPaint.textSize = value
         }
+    private var isShowWarning = false
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    //region# Blink : Warning
+    private var warningCells = mutableListOf<Cell>()
+    private var blink = false
+        set(value) {
+            field = value
+            invalidate()
+        }
+    private var count = 0
+
+    private val runnableBlink = object : Runnable {
+        override fun run() {
+            blink = !blink
+            count++
+            if (count == 4) {
+                count = 0
+                removeCallbacks(this)
+                return
+            }
+            postDelayed(this, 350)
+        }
+    }
+    //endregion
+
     private val textBound = Rect()
 
     private val gestureDetector: GestureDetector by lazy {
@@ -81,13 +118,22 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                     ?: -1
                 val y = (0 until 9).firstOrNull { e.y > it * cellHeight && e.y < (it + 1) * cellHeight }
                     ?: -1
-                val cell = board?.get(x, y) ?: return false
+                val cell = board.matrix?.get(x, y) ?: return false
+
                 if (cell.isEditable) {
-                    listener?.onNumberEditableClicked(cell.value)
-                    updateSelectedPoint(x, y)
-                } else {
+                    inputCell?.let {
+                        if (isValidate(x, y, it.value)) {
+                            drawNumber(x, y, it.value)
+                        } else {
+                            showWaring(x, y, it.value)
+                        }
+                    }
+                    return false
+                }
+
+                if (!cell.isEditable) {
                     listener?.onNumberUnEditableClicked(cell.value)
-                    findAllTheSameCell(cell)
+                    drawBackgroundStroke(cell)
                 }
                 return false
             }
@@ -143,21 +189,20 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         canvas?.drawRect(cellWidth * 6, cellWidth * 3, cellWidth * 12, cellHeight * 6, boardPaint)
         canvas?.drawRect(cellWidth * 3, cellWidth * 6, cellWidth * 6, cellHeight * 12, boardPaint)
 
-        //Draw Selected background
-        run {
-            val x = selectedPoint.x
-            val y = selectedPoint.y
-            if (x != -1 && y != -1) {
-                val left = x * cellWidth
-                val top = y * cellHeight
-                val right = left + cellWidth
-                val bottom = top + cellHeight
-                canvas?.drawRect(left, top, right, bottom, selectPaint)
+        //Draw Background waring
+        if (blink) {
+            warningCells.forEach { cell ->
+                val left = cell.x * cellWidth + lineStrokeSecondary
+                val top = cell.y * cellHeight + lineStrokeSecondary
+                val right = left + cellWidth - lineStrokeSecondary * 2
+                val bottom = top + cellHeight - lineStrokeSecondary * 2
+                canvas?.drawRect(left, top, right, bottom, warningPaint)
             }
         }
-        //Draw Background of Same Cell
+
+        //Draw Background stroke
         run {
-            sameCells.forEach { cell ->
+            selectedCells.forEach { cell ->
                 val left = cell.x * cellWidth + lineStrokeSecondary
                 val top = cell.y * cellHeight + lineStrokeSecondary
                 val right = left + cellWidth - lineStrokeSecondary * 2
@@ -168,7 +213,7 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
 
         //Draw Number
         Array2D(9, 9) { row, col ->
-            val cell = board?.get(row, col)
+            val cell = board.matrix?.get(row, col)
             val text = if (cell?.value != 0) cell?.value.toString() else ""
             numberPaint.getTextBounds(text, 0, text.length, textBound)
             val x = row * cellWidth + cellWidth / 2
@@ -203,57 +248,36 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         }
     }
 
-    private fun updateSelectedPoint(x: Int, y: Int) {
-        sameCells.clear()
-        if (selectedPoint.x == x && selectedPoint.y == y) {
-            selectedPoint.set(-1, -1)
-            invalidate()
-            return
-        }
-        selectedPoint.set(x, y)
-        invalidate()
-    }
-
-    private fun findAllTheSameCell(cellInput: Cell?) {
-        sameCells.clear()
-        selectedPoint.set(-1, -1)
-        board?.forEachIndexed { _, _, cell ->
-            if (cell != null && cell.value == cellInput?.value) {
-                sameCells.add(cell)
+    fun drawBackgroundStroke(cell: Cell?) {
+        this.inputCell = cell
+        selectedCells.clear()
+        board.matrix?.forEachIndexed { _, _, c ->
+            if (c != null && c.value == cell?.value) {
+                selectedCells.add(c)
             }
         }
         invalidate()
     }
 
-    fun highLightSelectedCell(button: TextView?) {
-        if (button == null) {
-            sameCells.clear()
-            invalidate()
-            return
-        }
-        val cell = Cell().apply {
-            value = button.text.toString().toInt()
-        }
-        findAllTheSameCell(cell)
-    }
-
-    fun drawNumber(number: String?) {
-        if (selectedPoint.isNull()) return
-        board?.get(selectedPoint.x, selectedPoint.y)?.value = number?.toInt() ?: 0
-        invalidate()
-    }
-
-    fun delete() {
-        if (selectedPoint.isNull()) return
-        board?.get(selectedPoint.x, selectedPoint.y)?.value = 0
+    fun drawNumber(x: Int, y: Int, number: Int) {
+        board.matrix?.get(x, y)?.value = number
         invalidate()
     }
 
     fun restart() {
-        board?.forEach {
+        board.matrix?.forEach {
             if (it?.isEditable == true) it.value = 0
         }
         invalidate()
+    }
+
+    private fun showWaring(x: Int, y: Int, value: Int) {
+        post(runnableBlink)
+    }
+
+    private fun isValidate(x: Int, y: Int, value: Int): Boolean {
+        warningCells = board.findWrongItem(x, y, value)
+        return warningCells.isEmpty()
     }
 
     interface SudokuBoardViewListener {
@@ -261,8 +285,4 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         fun onNumberEditableClicked(number: Int)
     }
 
-}
-
-private fun Point.isNull(): Boolean {
-    return this.x == -1 || this.y == -1
 }

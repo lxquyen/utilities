@@ -7,6 +7,7 @@ import com.steve.utilities.common.base.BaseFragment
 import com.steve.utilities.common.base.BasePresenter
 import com.steve.utilities.common.di.component.AppComponent
 import com.steve.utilities.common.widget.SudokuBoardView
+import com.steve.utilities.domain.model.Cell
 import kotlinx.android.synthetic.main.fragment_sudoku_game.*
 import javax.inject.Inject
 
@@ -52,10 +53,7 @@ class SudokuGameFragment : BaseFragment<SudokuGameView, SudokuGamePresenter>(), 
         }
 
         buttonIds.forEach { this@SudokuGameFragment.view?.findViewById<TextView>(it)?.setOnClickListener(this) }
-        keyIds.forEach { this@SudokuGameFragment.view?.findViewById<TextView>(it)?.setOnClickListener(this) }
         levelIds.forEach { this@SudokuGameFragment.view?.findViewById<TextView>(it)?.setOnClickListener(this) }
-        key_restart.setOnClickListener(this)
-        key_delete.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -63,18 +61,6 @@ class SudokuGameFragment : BaseFragment<SudokuGameView, SudokuGamePresenter>(), 
             val isSelected = it == v.id
             val button: TextView? = view?.findViewById(it)
             button?.isSelected = isSelected
-        }
-
-        when (v.id) {
-            R.id.key_restart -> restart()
-            R.id.key_delete -> boardView.delete()
-        }
-
-        keyIds.forEach {
-            if (it == v.id) {
-                val numberTV = view?.findViewById<TextView>(it)
-                boardView.drawNumber(numberTV?.text?.toString())
-            }
         }
         toggleHighLightBoard()
     }
@@ -85,7 +71,14 @@ class SudokuGameFragment : BaseFragment<SudokuGameView, SudokuGamePresenter>(), 
 
     private fun toggleHighLightBoard() {
         val button = buttonIds.map { view?.findViewById<TextView>(it) }.firstOrNull { it?.isSelected == true }
-        boardView.highLightSelectedCell(button)
+        var cell: Cell? = null
+
+        if (button != null) {
+            cell = Cell().apply {
+                value = button.text.toString().toIntOrNull() ?: 0
+            }
+        }
+        boardView.drawBackgroundStroke(cell)
     }
 
     override fun onNumberUnEditableClicked(number: Int) {

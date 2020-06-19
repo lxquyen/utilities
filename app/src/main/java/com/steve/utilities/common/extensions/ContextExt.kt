@@ -20,20 +20,20 @@ fun Context?.readGameBoards(): Array2D<Cell?> {
     val bufferedReader = BufferedReader(InputStreamReader(inputStream))
     var line = bufferedReader.readLine()
     val result = Array2D<Cell>(9, 9)
-    var row = 0
+    var yy = 0
     while (line != null) {
         line.split("")
             .filter { it.toIntOrNull() != null }
-            .forEachIndexed { index, s ->
+            .forEachIndexed { xx, s ->
                 val cell = Cell().apply {
-                    x = row
-                    y = index
+                    x = xx
+                    y = yy
                     value = s.toInt()
                     isEditable = s == "0"
                 }
-                result[row, index] = cell
+                result[xx, yy] = cell
             }
-        row++
+        yy++
         line = bufferedReader.readLine()
     }
     bufferedReader.close()
