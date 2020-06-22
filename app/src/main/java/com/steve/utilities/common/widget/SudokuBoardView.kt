@@ -6,7 +6,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
-import android.os.SystemClock
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.GestureDetector
@@ -17,6 +16,7 @@ import com.steve.utilities.common.extensions.readGameBoards
 import com.steve.utilities.core.extensions.Array2D
 import com.steve.utilities.domain.model.Board
 import com.steve.utilities.domain.model.Cell
+import timber.log.Timber
 
 class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     var listener: SudokuBoardViewListener? = null
@@ -73,8 +73,16 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
     //endregion
 
+    private val steps = mutableListOf<Cell>()
     private val selectedCells = mutableListOf<Cell>()
     private var inputCell: Cell? = null
+        set(value) {
+            field = value
+            field?.let {
+                isDelete = false
+            }
+        }
+
     private var textSize = 0f
         set(value) {
             field = value
@@ -104,6 +112,12 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
     //endregion
 
+    private var isDelete = false
+        set(value) {
+            field = value
+            listener?.onDeleteActionChanged(field)
+        }
+
     private val textBound = Rect()
 
     private val gestureDetector: GestureDetector by lazy {
@@ -116,6 +130,11 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                 val cell = board.matrix?.get(x, y) ?: return false
 
                 if (cell.isEditable) {
+                    if (isDelete) {
+                        drawNumber(x, y, 0)
+                        return false
+                    }
+
                     inputCell?.let {
                         if (isValidate(x, y, it.value)) {
                             drawNumber(x, y, it.value)
@@ -254,22 +273,44 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         invalidate()
     }
 
-    fun drawNumber(x: Int, y: Int, number: Int) {
+    fun drawNumber(x: Int, y: Int, number: Int, isUndo: Boolean = false) {
+        Timber.d("drawNumber cell: $x, $y, $number, $isUndo")
         board.matrix?.get(x, y)
             ?.apply {
                 value = number
             }?.let {
-                selectedCells.add(it)
+                if (!isUndo) addStep(x, y, number)
+                if (!isDelete) selectedCells.add(it)
             }
         listener?.onBoardChanged(board.matrix)
         invalidate()
     }
 
     fun restart() {
+        steps.clear()
+        isDelete = false
         board.matrix?.forEach {
             if (it?.isEditable == true) it.value = 0
         }
+        listener?.onStepsChanged(true)
         invalidate()
+    }
+
+    fun undo() {
+        if (steps.isEmpty()) return
+        isDelete = false
+
+        val removedCell = steps.removeAt(steps.lastIndex)
+        listener?.onStepsChanged(steps.isEmpty())
+
+        val previousCell = steps.findLast { it.x == removedCell.x && it.y == removedCell.y }
+            ?: Cell(removedCell).apply { value = 0 }
+
+        drawNumber(previousCell.x, previousCell.y, previousCell.value, true)
+    }
+
+    fun clear() {
+        isDelete = !isDelete
     }
 
     private fun showWaring(x: Int, y: Int, value: Int) {
@@ -277,14 +318,26 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
     }
 
     private fun isValidate(x: Int, y: Int, value: Int): Boolean {
-        warningCells = board.findWrongItem(x, y, value)
+        warningCells = board.findWarningItem(x, y, value)
         return warningCells.isEmpty()
+    }
+
+    private fun addStep(x: Int, y: Int, value: Int) {
+        val cell = Cell().apply {
+            this.x = x
+            this.y = y
+            this.value = value
+        }
+        steps.add(cell)
+        listener?.onStepsChanged(steps.isEmpty())
     }
 
     interface SudokuBoardViewListener {
         fun onNumberUnEditableClicked(number: Int)
         fun onNumberEditableClicked(number: Int)
         fun onBoardChanged(matrix: Array2D<Cell?>?)
+        fun onDeleteActionChanged(isDelete: Boolean)
+        fun onStepsChanged(isEmpty: Boolean)
     }
 
 }

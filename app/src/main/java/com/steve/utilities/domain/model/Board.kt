@@ -4,7 +4,7 @@ import com.steve.utilities.core.extensions.Array2D
 
 class Board(val matrix: Array2D<Cell?>?) {
 
-    fun findWrongItem(x: Int, y: Int, value: Int): MutableList<Cell> {
+    fun findWarningItem(x: Int, y: Int, value: Int): MutableList<Cell> {
         val result = mutableListOf<Cell>()
 
         matrix ?: return result

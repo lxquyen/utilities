@@ -137,75 +137,30 @@
             android:text="@string/very_hard" />
     </LinearLayout>
 
-    <GridLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:columnCount="3"
-        android:orientation="vertical"
-        android:rowCount="4"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/key_one"
-            style="@style/Button.Key"
-            android:text="@string/number_one" />
-
-        <TextView
-            android:id="@+id/key_four"
-            style="@style/Button.Key"
-            android:text="@string/number_four" />
-
-        <TextView
-            android:id="@+id/key_seven"
-            style="@style/Button.Key"
-            android:text="@string/number_seven" />
-
-        <TextView
-            android:id="@+id/key_undo"
-            style="@style/Button.Action"
-            android:text="@string/undo"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/key_two"
-            style="@style/Button.Key"
-            android:text="@string/number_two" />
-
-        <TextView
-            android:id="@+id/key_five"
-            style="@style/Button.Key"
-            android:text="@string/number_five" />
-
-        <TextView
-            android:id="@+id/key_eight"
-            style="@style/Button.Key"
-            android:text="@string/number_eight" />
-
-        <TextView
-            android:id="@+id/key_restart"
-            style="@style/Button.Action"
-            android:text="@string/restart" />
-
-        <TextView
-            android:id="@+id/key_three"
-            style="@style/Button.Key"
-            android:text="@string/number_three" />
-
-        <TextView
-            android:id="@+id/key_six"
-            style="@style/Button.Key"
-            android:text="@string/number_six" />
-
-        <TextView
-            android:id="@+id/key_nine"
-            style="@style/Button.Key"
-            android:text="@string/number_nine" />
+        android:divider="@drawable/divider_horizontal"
+        android:gravity="center"
+        android:showDividers="middle">
 
         <ImageButton
-            android:id="@+id/key_delete"
-            style="@style/Button.Key"
+            android:id="@+id/action_undo"
+            style="@style/Button.Action"
+            android:alpha="0.1"
+            android:clickable="false"
+            android:src="@drawable/ic_undo_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/action_restart"
+            style="@style/Button.Action"
+            android:src="@drawable/ic_refresh_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/action_clear"
+            style="@style/Button.Action"
             android:src="@drawable/ic_clear_black_24dp" />
-    </GridLayout>
+    </LinearLayout>
 
 </LinearLayout>
