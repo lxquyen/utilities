@@ -1,5 +1,6 @@
 package com.steve.utilities.presentation.customviews.sudoku
 
+import android.os.SystemClock
 import android.view.View
 import android.widget.TextView
 import com.steve.utilities.R
@@ -130,5 +131,22 @@ class SudokuGameFragment : BaseFragment<SudokuGameView, SudokuGamePresenter>(), 
             isClickable = !isEmpty
             alpha = if (isEmpty) 0.1f else 1f
         }
+    }
+
+    override fun onStartGameChanged(status: SudokuBoardView.StatusGame) {
+        when (status) {
+            SudokuBoardView.StatusGame.IDE -> {
+                tv_time.base = SystemClock.elapsedRealtime()
+                tv_time.stop()
+            }
+            SudokuBoardView.StatusGame.START -> {
+                tv_time.base = SystemClock.elapsedRealtime()
+                tv_time.start()
+            }
+            else -> {
+                tv_time.stop()
+            }
+        }
+
     }
 }

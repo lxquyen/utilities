@@ -118,6 +118,12 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
             listener?.onDeleteActionChanged(field)
         }
 
+    private var isStart: StatusGame = StatusGame.IDE
+        set(value) {
+            field = value
+            listener?.onStartGameChanged(field)
+        }
+
     private val textBound = Rect()
 
     private val gestureDetector: GestureDetector by lazy {
@@ -275,6 +281,8 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
 
     fun drawNumber(x: Int, y: Int, number: Int, isUndo: Boolean = false) {
         Timber.d("drawNumber cell: $x, $y, $number, $isUndo")
+        startGameIfNeed(number, isUndo)
+
         board.matrix?.get(x, y)
             ?.apply {
                 value = number
@@ -286,8 +294,14 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         invalidate()
     }
 
+    private fun startGameIfNeed(number: Int, undo: Boolean) {
+        if (isStart == StatusGame.START || number == 0 || undo) return
+        isStart = StatusGame.START
+    }
+
     fun restart() {
         steps.clear()
+        isStart = StatusGame.IDE
         isDelete = false
         board.matrix?.forEach {
             if (it?.isEditable == true) it.value = 0
@@ -338,6 +352,10 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
         fun onBoardChanged(matrix: Array2D<Cell?>?)
         fun onDeleteActionChanged(isDelete: Boolean)
         fun onStepsChanged(isEmpty: Boolean)
+        fun onStartGameChanged(status: StatusGame)
     }
 
+    enum class StatusGame {
+        IDE, START, FINISH
+    }
 }
