@@ -10,4 +10,9 @@
         style="@style/Button.Menu"
         android:text="@string/menu_custom_view" />
 
+    <Button
+        android:id="@+id/btn_rank"
+        style="@style/Button.Menu"
+        android:text="@string/menu_rank" />
+
 </LinearLayout>

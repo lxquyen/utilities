@@ -1,4 +1,4 @@
-package com.steve.utilities.presentation.customviews.sudoku
+package com.steve.utilities.presentation.sudoku.play
 
 import com.steve.utilities.common.base.BasePresenter
 import javax.inject.Inject

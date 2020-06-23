@@ -1,4 +1,4 @@
-package com.steve.utilities.presentation.customviews.sudoku
+package com.steve.utilities.presentation.sudoku.play
 
 import android.os.SystemClock
 import android.view.View
@@ -10,7 +10,6 @@ import com.steve.utilities.common.di.component.AppComponent
 import com.steve.utilities.common.widget.SudokuBoardView
 import com.steve.utilities.core.extensions.Array2D
 import com.steve.utilities.domain.model.Cell
-import io.reactivex.internal.operators.maybe.MaybeIsEmpty
 import kotlinx.android.synthetic.main.fragment_sudoku_game.*
 import javax.inject.Inject
 

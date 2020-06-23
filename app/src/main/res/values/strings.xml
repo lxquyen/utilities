@@ -19,4 +19,9 @@
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
     <string name="very_hard">Very Hard</string>
+    <string name="menu_rank">Rank</string>
+    <string name="item_rank_header_position">#</string>
+    <string name="item_rank_header_name">Login name</string>
+    <string name="item_rank_header_score">Score</string>
+    <string name="item_rank_header_last_played">Last played</string>
 </resources>

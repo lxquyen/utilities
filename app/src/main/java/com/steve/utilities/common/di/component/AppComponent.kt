@@ -3,7 +3,8 @@ package com.steve.utilities.common.di.component
 import android.app.Application
 import com.steve.utilities.common.di.module.AppModule
 import com.steve.utilities.presentation.MainFragment
-import com.steve.utilities.presentation.customviews.sudoku.SudokuGameFragment
+import com.steve.utilities.presentation.sudoku.play.SudokuGameFragment
+import com.steve.utilities.presentation.sudoku.rank.RankFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -15,6 +16,7 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(mainFragment: MainFragment)
     fun inject(sudokuGameFragment: SudokuGameFragment)
+    fun inject(rankFragment: RankFragment)
 
     @Component.Builder
     interface Builder {
