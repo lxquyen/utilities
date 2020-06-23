@@ -136,7 +136,7 @@ class SudokuBoardView(context: Context?, attrs: AttributeSet?) : View(context, a
                 val cell = board.matrix?.get(x, y) ?: return false
 
                 if (cell.isEditable) {
-                    if (isDelete) {
+                    if (isDelete && cell.value != 0) {
                         drawNumber(x, y, 0)
                         return false
                     }
