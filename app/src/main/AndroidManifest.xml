@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".common.base.SubActivity" />
+
+        <service android:name=".domain.service.MusicService" />
     </application>
 
 </manifest>
