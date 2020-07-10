@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".common.base.SubActivity" />
 
-        <service android:name=".domain.service.MusicService" />
+        <service android:name="com.steve.utilities.domain.service.media.MusicService" />
     </application>
 
 </manifest>
