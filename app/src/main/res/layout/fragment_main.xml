@@ -15,4 +15,8 @@
         style="@style/Button.Menu"
         android:text="@string/menu_rank" />
 
+    <Button
+        android:id="@+id/btn_rxjava"
+        style="@style/Button.Menu"
+        android:text="@string/menu_rxjava" />
 </LinearLayout>

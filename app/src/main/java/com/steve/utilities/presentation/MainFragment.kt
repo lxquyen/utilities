@@ -6,6 +6,7 @@ import com.steve.utilities.common.base.BaseFragment
 import com.steve.utilities.common.base.BasePresenter
 import com.steve.utilities.common.di.component.AppComponent
 import com.steve.utilities.common.extensions.startActivity
+import com.steve.utilities.presentation.rxjava.RxJavaFragment
 import com.steve.utilities.presentation.sudoku.play.SudokuGameFragment
 import com.steve.utilities.presentation.sudoku.rank.RankFragment
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -15,7 +16,8 @@ class MainFragment : BaseFragment<MainView, MainPresenter>(), MainView, View.OnC
 
     private val buttons = listOf(
         R.id.btn_custom_view,
-        R.id.btn_rank
+        R.id.btn_rank,
+        R.id.btn_rxjava
     )
 
     @Inject
@@ -45,6 +47,7 @@ class MainFragment : BaseFragment<MainView, MainPresenter>(), MainView, View.OnC
         when (v?.id) {
             R.id.btn_custom_view -> context?.startActivity(SudokuGameFragment::class.java)
             R.id.btn_rank -> context?.startActivity(RankFragment::class.java)
+            R.id.btn_rxjava -> context?.startActivity(RxJavaFragment::class.java)
         }
     }
 }
