@@ -18,7 +18,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".common.base.SubActivity" />
-
     </application>
 
 </manifest>

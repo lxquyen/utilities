@@ -3,6 +3,7 @@ package com.steve.utilities.common.di.component
 import android.app.Application
 import com.steve.utilities.common.di.module.AppModule
 import com.steve.utilities.presentation.MainFragment
+import com.steve.utilities.presentation.audio.AudioFocusFragment
 import com.steve.utilities.presentation.rxjava.RxJavaFragment
 import com.steve.utilities.presentation.sudoku.play.SudokuGameFragment
 import com.steve.utilities.presentation.sudoku.rank.RankFragment
@@ -19,6 +20,7 @@ interface AppComponent {
     fun inject(sudokuGameFragment: SudokuGameFragment)
     fun inject(rankFragment: RankFragment)
     fun inject(rxJavaFragment: RxJavaFragment)
+    fun inject(audioFocusFragment: AudioFocusFragment)
 
     @Component.Builder
     interface Builder {

@@ -19,4 +19,9 @@
         android:id="@+id/btn_rxjava"
         style="@style/Button.Menu"
         android:text="@string/menu_rxjava" />
+
+    <Button
+        android:id="@+id/btn_audio"
+        style="@style/Button.Menu"
+        android:text="@string/menu_audio" />
 </LinearLayout>

@@ -25,4 +25,6 @@
     <string name="item_rank_header_score">Score</string>
     <string name="item_rank_header_last_played">Last played</string>
     <string name="menu_rxjava">RxJava</string>
+    <string name="menu_audio">Audio Focus</string>
+    <string name="play">Play</string>
 </resources>
