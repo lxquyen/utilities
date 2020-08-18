@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.steve.utilities.R
 import com.steve.utilities.common.extensions.createNotificationChannel
+import com.steve.utilities.presentation.MainActivity
 import timber.log.Timber
 
 
@@ -44,8 +45,8 @@ class MyService : Service() {
         createNotificationChannel(id = CHANNEL_DEFAULT, name = "test", importance = NotificationManager.IMPORTANCE_MAX)
         Timber.d("Start foreground service.")
 
-        val intent = Intent()
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        val intent = Intent(this, MainActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(this, 1, intent, 0)
         val builder = NotificationCompat.Builder(this, CHANNEL_DEFAULT)
             .setContentTitle(getString(R.string.app_name))
             .setSmallIcon(R.drawable.ic_vcall)
@@ -53,6 +54,7 @@ class MyService : Service() {
             .setOngoing(true)
             .setOnlyAlertOnce(true)
             .setCategory(Notification.CATEGORY_CALL)
+            .setFullScreenIntent(pendingIntent, true)
             .setPriority(NotificationManager.IMPORTANCE_MAX)
         startForeground(1, builder.build())
     }

@@ -1,13 +1,12 @@
 package com.steve.utilities.common.extensions
 
 import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.os.Build
-import androidx.annotation.RequiresApi
+import android.os.PowerManager
+import android.view.WindowManager
 import com.steve.utilities.R
 import com.steve.utilities.common.base.SubActivity
 import com.steve.utilities.core.extensions.Array2D
@@ -15,6 +14,7 @@ import com.steve.utilities.domain.model.Cell
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
+
 
 fun Context?.startActivity(fragment: Class<*>) {
     SubActivity.start(this, fragment)
@@ -54,7 +54,26 @@ fun Service?.createNotificationChannel(id: String,
     val channel = NotificationChannel(id, name, importance)
         .apply {
             this.description = description
+            this.enableVibration(false)
         }
     val notificationManager = this?.getSystemService(NOTIFICATION_SERVICE) as? NotificationManager
     notificationManager?.createNotificationChannel(channel)
+}
+
+fun Activity.wakeupIfNeeded() {
+    val pm = this.getSystemService(Context.POWER_SERVICE) as PowerManager
+    val wakelock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP, "Call:wake")
+    wakelock.acquire(3000L)
+}
+
+fun Activity.setFlagsShowWhenLocked() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) { // For newer than Android Oreo: call setShowWhenLocked, setTurnScreenOn
+        this.setShowWhenLocked(true)
+        this.setTurnScreenOn(true)
+        // If you want to display the keyguard to prompt the user to unlock the phone:
+        val keyguardManager = this.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager?
+        keyguardManager?.requestDismissKeyguard(this, null)
+    } else { // For older versions, do it as you did before.
+        this.window?.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    }
 }
