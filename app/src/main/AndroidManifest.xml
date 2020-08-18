@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.steve.utilities">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application
         android:name=".common.MyApp"
         android:allowBackup="true"
@@ -18,6 +19,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".common.base.SubActivity" />
+
+        <service
+            android:name=".presentation.service.MyService"
+            android:foregroundServiceType="phoneCall" />
     </application>
 
 </manifest>

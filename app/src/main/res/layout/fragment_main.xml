@@ -24,4 +24,9 @@
         android:id="@+id/btn_audio"
         style="@style/Button.Menu"
         android:text="@string/menu_audio" />
+
+    <Button
+        android:id="@+id/btn_service"
+        style="@style/Button.Menu"
+        android:text="@string/menu_service" />
 </LinearLayout>
