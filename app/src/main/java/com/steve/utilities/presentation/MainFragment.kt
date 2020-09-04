@@ -7,6 +7,7 @@ import com.steve.utilities.common.base.BasePresenter
 import com.steve.utilities.common.di.component.AppComponent
 import com.steve.utilities.common.extensions.startActivity
 import com.steve.utilities.presentation.audio.AudioFocusFragment
+import com.steve.utilities.presentation.circularprogressbar.CircularProgressBarFragment
 import com.steve.utilities.presentation.rxjava.RxJavaFragment
 import com.steve.utilities.presentation.service.ServiceExampleFragment
 import com.steve.utilities.presentation.sudoku.play.SudokuGameFragment
@@ -21,7 +22,8 @@ class MainFragment : BaseFragment<MainView, MainPresenter>(), MainView, View.OnC
         R.id.btn_rank,
         R.id.btn_rxjava,
         R.id.btn_audio,
-        R.id.btn_service
+        R.id.btn_service,
+        R.id.btn_circular_progress_bar
     )
 
     @Inject
@@ -54,6 +56,7 @@ class MainFragment : BaseFragment<MainView, MainPresenter>(), MainView, View.OnC
             R.id.btn_rxjava -> context?.startActivity(RxJavaFragment::class.java)
             R.id.btn_audio -> context?.startActivity(AudioFocusFragment::class.java)
             R.id.btn_service -> context?.startActivity(ServiceExampleFragment::class.java)
+            R.id.btn_circular_progress_bar -> context?.startActivity(CircularProgressBarFragment::class.java)
         }
     }
 }

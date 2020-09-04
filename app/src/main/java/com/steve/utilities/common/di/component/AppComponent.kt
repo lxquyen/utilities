@@ -4,6 +4,7 @@ import android.app.Application
 import com.steve.utilities.common.di.module.AppModule
 import com.steve.utilities.presentation.MainFragment
 import com.steve.utilities.presentation.audio.AudioFocusFragment
+import com.steve.utilities.presentation.circularprogressbar.CircularProgressBarFragment
 import com.steve.utilities.presentation.rxjava.RxJavaFragment
 import com.steve.utilities.presentation.service.ServiceExampleFragment
 import com.steve.utilities.presentation.sudoku.play.SudokuGameFragment
@@ -23,6 +24,7 @@ interface AppComponent {
     fun inject(rxJavaFragment: RxJavaFragment)
     fun inject(audioFocusFragment: AudioFocusFragment)
     fun inject(serviceExampleFragment: ServiceExampleFragment)
+    fun inject(circularProgressBarFragment: CircularProgressBarFragment)
 
     @Component.Builder
     interface Builder {
