@@ -1,13 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <com.steve.utilities.common.widget.CircularProgressView
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_gravity="center"
         app:cpv_animAutoStart="true"
         app:cpv_color="@color/colorAccent"
         app:cpv_indeterminate="true" />
-</FrameLayout>
+
+    <com.steve.utilities.common.widget.TwoCircularProgressView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:tcpv_space="2.5dp"
+        app:tcpv_color_start="#959595"
+        app:tcpv_color_end="#FFFFFF"
+        app:tcpv_thickness="1.5dp" />
+</LinearLayout>

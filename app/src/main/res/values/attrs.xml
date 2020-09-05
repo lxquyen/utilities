@@ -27,4 +27,11 @@
         <attr name="cpv_animSteps" format="integer" />
         <attr name="cpv_startAngle" format="float" />
     </declare-styleable>
+
+    <declare-styleable name="TwoCircularProgressView">
+        <attr name="tcpv_color_start" format="color" />
+        <attr name="tcpv_color_end" format="color" />
+        <attr name="tcpv_thickness" format="dimension" />
+        <attr name="tcpv_space" format="dimension" />
+    </declare-styleable>
 </resources>

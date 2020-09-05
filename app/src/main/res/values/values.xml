@@ -2,6 +2,7 @@
 <resources>
     <color name="cpv_default_color">#2196F3</color>
     <dimen name="cpv_default_thickness">4dp</dimen>
+    <dimen name="cpv_default_space">4dp</dimen>
     <integer name="cpv_default_progress">0</integer>
     <integer name="cpv_default_max_progress">100</integer>
     <bool name="cpv_default_is_indeterminate">false</bool>
