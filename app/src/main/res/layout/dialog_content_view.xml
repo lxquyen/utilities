@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call Settings"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.steve.utilities.common.widget.TwoCircularProgressView
+        android:id="@+id/progress_circular"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="40dp"
+        app:tcpv_color_end="#FFFFFF"
+        app:tcpv_color_start="#959595"
+        app:tcpv_space="2.5dp"
+        app:tcpv_thickness="2dp" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/progress_circular"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/progress_circular"
+        android:text="Reading settings..."
+        android:textSize="16sp" />
+</RelativeLayout>

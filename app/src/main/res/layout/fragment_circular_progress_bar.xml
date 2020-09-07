@@ -15,8 +15,14 @@
     <com.steve.utilities.common.widget.TwoCircularProgressView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        app:tcpv_space="2.5dp"
-        app:tcpv_color_start="#959595"
         app:tcpv_color_end="#FFFFFF"
+        app:tcpv_color_start="#959595"
+        app:tcpv_space="2.5dp"
         app:tcpv_thickness="1.5dp" />
+
+    <Button
+        android:id="@+id/btnShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show" />
 </LinearLayout>

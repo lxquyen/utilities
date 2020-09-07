@@ -33,4 +33,5 @@
     <string name="start_foreground">Start foreground</string>
     <string name="stop_foreground">Stop foreground</string>
     <string name="menu_circular_progress_bar">Circular Progress Bar</string>
+    <string name="show">Show</string>
 </resources>
