@@ -34,4 +34,5 @@
     <string name="stop_foreground">Stop foreground</string>
     <string name="menu_circular_progress_bar">Circular Progress Bar</string>
     <string name="show">Show</string>
+    <string name="tap">Tap</string>
 </resources>

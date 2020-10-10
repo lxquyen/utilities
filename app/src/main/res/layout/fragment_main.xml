@@ -1,37 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rvMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
-
-    <Button
-        android:id="@+id/btn_custom_view"
-        style="@style/Button.Menu"
-        android:text="@string/menu_custom_view" />
-
-    <Button
-        android:id="@+id/btn_rank"
-        style="@style/Button.Menu"
-        android:text="@string/menu_rank" />
-
-    <Button
-        android:id="@+id/btn_rxjava"
-        style="@style/Button.Menu"
-        android:text="@string/menu_rxjava" />
-
-    <Button
-        android:id="@+id/btn_audio"
-        style="@style/Button.Menu"
-        android:text="@string/menu_audio" />
-
-    <Button
-        android:id="@+id/btn_service"
-        style="@style/Button.Menu"
-        android:text="@string/menu_service" />
-
-    <Button
-        android:id="@+id/btn_circular_progress_bar"
-        style="@style/Button.Menu"
-        android:text="@string/menu_circular_progress_bar" />
-</LinearLayout>
+    tools:listitem="@layout/item_main"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

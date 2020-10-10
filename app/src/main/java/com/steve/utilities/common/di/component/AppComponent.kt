@@ -5,7 +5,10 @@ import com.steve.utilities.common.di.module.AppModule
 import com.steve.utilities.presentation.MainFragment
 import com.steve.utilities.presentation.audio.AudioFocusFragment
 import com.steve.utilities.presentation.circularprogressbar.CircularProgressBarFragment
+import com.steve.utilities.presentation.gridmanager.GridManagerFragment
+import com.steve.utilities.presentation.ripple.RippleFragment
 import com.steve.utilities.presentation.rxjava.RxJavaFragment
+import com.steve.utilities.presentation.service.RecordFragment
 import com.steve.utilities.presentation.service.ServiceExampleFragment
 import com.steve.utilities.presentation.sudoku.play.SudokuGameFragment
 import com.steve.utilities.presentation.sudoku.rank.RankFragment
