@@ -1,5 +1,6 @@
 package com.steve.utilities.presentation
 
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,6 @@ import com.steve.utilities.presentation.gridmanager.GridManagerFragment
 import com.steve.utilities.presentation.ripple.RippleFragment
 import com.steve.utilities.presentation.rxjava.RxJavaFragment
 import com.steve.utilities.presentation.service.ServiceExampleFragment
-import com.steve.utilities.presentation.sudoku.play.SudokuGameFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.item_main.view.*
 import javax.inject.Inject
@@ -54,7 +54,10 @@ class MainFragment : BaseFragment<MainView, MainPresenter>(), MainView {
         rvMain.apply {
             adapter = MainAdapter { index ->
                 when (index) {
-                    0 -> context?.startActivity(SudokuGameFragment::class.java)
+                    0 -> {
+                        context?.startActivity(Intent(context, BlurActivity::class.java))
+//                        context?.startActivity(SudokuGameFragment::class.java)
+                    }
                     1 -> context?.startActivity(RxJavaFragment::class.java)
                     2 -> context?.startActivity(AudioFocusFragment::class.java)
                     3 -> context?.startActivity(ServiceExampleFragment::class.java)

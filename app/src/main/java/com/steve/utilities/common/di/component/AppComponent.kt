@@ -8,7 +8,6 @@ import com.steve.utilities.presentation.circularprogressbar.CircularProgressBarF
 import com.steve.utilities.presentation.gridmanager.GridManagerFragment
 import com.steve.utilities.presentation.ripple.RippleFragment
 import com.steve.utilities.presentation.rxjava.RxJavaFragment
-import com.steve.utilities.presentation.service.RecordFragment
 import com.steve.utilities.presentation.service.ServiceExampleFragment
 import com.steve.utilities.presentation.sudoku.play.SudokuGameFragment
 import com.steve.utilities.presentation.sudoku.rank.RankFragment
@@ -28,6 +27,8 @@ interface AppComponent {
     fun inject(audioFocusFragment: AudioFocusFragment)
     fun inject(serviceExampleFragment: ServiceExampleFragment)
     fun inject(circularProgressBarFragment: CircularProgressBarFragment)
+    fun inject(gridManagerFragment: GridManagerFragment)
+    fun inject(rippleFragment: RippleFragment)
 
     @Component.Builder
     interface Builder {
