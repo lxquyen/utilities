@@ -8,22 +8,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.steve.utilities.R;
 import com.steve.utilities.common.widget.BlurBuilder;
+import com.steve.utilities.common.widget.VinHolderLayout;
+import com.steve.utilities.common.widget.VinTargetView;
 
-public class BlurActivity extends AppCompatActivity {
+public class BlurActivity extends AppCompatActivity implements VinHolderLayout.OnVinHolderLayoutCallbackLister {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bur);
-
-
         transparentStatusAndNavigation();
         blurWindowBackground();
+
+        VinHolderLayout holderLayout = findViewById(R.id.holderLayout);
+        holderLayout.setOnVinHolderLayoutCallbackLister(this);
     }
 
     private void blurWindowBackground() {
@@ -58,5 +62,25 @@ public class BlurActivity extends AppCompatActivity {
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+
+    @Override
+    public void onLeftSwiped() {
+        Toast.makeText(this,"onLeftSwiped",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRightSwiped() {
+        Toast.makeText(this,"onRightSwiped",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLeftClicked() {
+        Toast.makeText(this,"onLeftClicked",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRightClicked() {
+        Toast.makeText(this,"onRightClicked",Toast.LENGTH_SHORT).show();
     }
 }

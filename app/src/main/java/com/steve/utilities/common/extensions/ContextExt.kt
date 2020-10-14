@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.os.Build
 import android.os.PowerManager
+import android.util.TypedValue
 import android.view.WindowManager
 import com.steve.utilities.R
 import com.steve.utilities.common.base.SubActivity
@@ -76,4 +77,8 @@ fun Activity.setFlagsShowWhenLocked() {
     } else { // For older versions, do it as you did before.
         this.window?.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
+}
+
+fun Context?.dp2Px(dp: Float): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this?.resources?.displayMetrics)
 }

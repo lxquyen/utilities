@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.steve.utilities.common.widget.VinHolderLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
+    android:id="@+id/holderLayout"
+    android:clipChildren="false"
+    android:fitsSystemWindows="true"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".presentation.BlurActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imgAnswer"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:src="@drawable/ic_answer" />-->
+
+    <com.steve.utilities.common.widget.VinSwipeButtonView
+        android:id="@+id/imgReject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="104dp"
+        android:src="@drawable/bg_reject"
+        app:vin_circleColor="#29FFFFFF"
+        app:vin_circleProgressColor="#40000000"
+        app:vin_targetCircleColor="#ffffff" />
+
+    <com.steve.utilities.common.widget.VinSwipeButtonView
+        android:id="@+id/imgAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="104dp"
+        android:src="@drawable/bg_answer"
+        app:vin_circleColor="#29FFFFFF"
+        app:vin_circleProgressColor="#40000000"
+        app:vin_targetCircleColor="#ffffff" />
+</com.steve.utilities.common.widget.VinHolderLayout>
