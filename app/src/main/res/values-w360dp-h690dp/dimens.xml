@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+*v640*
+Pixel: WxH = 1080x 2100,
+DP: WxH = 360.0 x 700.0
+-->
+<resources>
+    <dimen name="xxxx">700dp</dimen>
+</resources>

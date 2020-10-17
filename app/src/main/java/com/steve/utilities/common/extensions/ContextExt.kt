@@ -82,3 +82,8 @@ fun Activity.setFlagsShowWhenLocked() {
 fun Context?.dp2Px(dp: Float): Float {
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this?.resources?.displayMetrics)
 }
+
+fun Context.px2Dp(px: Float): Float {
+    val density = this.resources.displayMetrics.density
+    return px / density
+}

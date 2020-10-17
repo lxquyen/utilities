@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+*v530*
+Pixel: WxH = 1080x 2196,
+DP: WxH = 360.0 x 700.0
+
+*V740*
+Pixel: WxH = 1080x 2121
+DP: WxH = 360.0 x 707.0
+
+*v741*
+Pixel: WxH = 1080x 2196
+DP: WxH = 360.0 x 732.0
+-->
+<resources>
+    <dimen name="xxxx">732dp</dimen>
+</resources>
