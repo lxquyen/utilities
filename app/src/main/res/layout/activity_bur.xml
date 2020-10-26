@@ -11,19 +11,6 @@
     android:orientation="vertical"
     tools:context=".presentation.BlurActivity">
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/imgAnswer"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:src="@drawable/ic_answer" />-->
-
-    <TextView
-        android:id="@+id/tvXXXX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
     <com.steve.utilities.common.widget.VinSwipeButtonView
         android:id="@+id/imgReject"
         android:layout_width="wrap_content"
@@ -47,4 +34,12 @@
         app:vin_circleColor="#29FFFFFF"
         app:vin_circleProgressColor="#40000000"
         app:vin_targetCircleColor="#ffffff" />
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="10dp"
+        android:text="@string/stop" />
 </com.steve.utilities.common.widget.VinHolderLayout>

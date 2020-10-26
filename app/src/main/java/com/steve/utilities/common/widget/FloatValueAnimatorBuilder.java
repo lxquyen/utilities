@@ -44,7 +44,7 @@ class FloatValueAnimatorBuilder {
         if (reverse) {
             this.animator = ValueAnimator.ofFloat(1.0f, 0.0f);
         } else {
-            this.animator = ValueAnimator.ofFloat(0.0f, 1.0f);
+            this.animator = ValueAnimator.ofFloat(0.0f, 1.0f, 0.9f, 0.1f, 0.0f);
         }
     }
 

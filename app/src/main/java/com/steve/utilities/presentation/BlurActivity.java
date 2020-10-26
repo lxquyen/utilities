@@ -6,22 +6,17 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.steve.utilities.R;
-import com.steve.utilities.common.extensions.ContextExtKt;
 import com.steve.utilities.common.widget.BlurBuilder;
 import com.steve.utilities.common.widget.VinHolderLayout;
-import com.steve.utilities.common.widget.VinTargetView;
-
-import timber.log.Timber;
+import com.steve.utilities.common.widget.VinSwipeButtonView;
 
 public class BlurActivity extends AppCompatActivity implements VinHolderLayout.OnVinHolderLayoutCallbackLister {
 
@@ -35,17 +30,6 @@ public class BlurActivity extends AppCompatActivity implements VinHolderLayout.O
 
         VinHolderLayout holderLayout = findViewById(R.id.holderLayout);
         holderLayout.setOnVinHolderLayoutCallbackLister(this);
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int widthPixel = displayMetrics.widthPixels;
-        int heightPixel = displayMetrics.heightPixels;
-        Timber.d("Pixel: WxH = " + widthPixel + "x " + heightPixel);
-        float widthDp = ContextExtKt.px2Dp(this, widthPixel);
-        float heightDp = ContextExtKt.px2Dp(this, heightPixel);
-        Timber.d("DP: WxH = " + widthDp + " x " + heightDp);
-
-        float xxxx = getResources().getDimension(R.dimen.xxxx);
-        TextView tvXXXX = findViewById(R.id.tvXXXX);
-        tvXXXX.setText("X = " + xxxx);
     }
 
     private void blurWindowBackground() {

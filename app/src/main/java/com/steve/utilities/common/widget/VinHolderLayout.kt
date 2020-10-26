@@ -41,16 +41,16 @@ class VinHolderLayout(context: Context, attrs: AttributeSet?) : FrameLayout(cont
                     return false
                 }
 
+
                 if (touchInsideLeft) {
                     leftTargetView?.expandAnimation()
+                    rightTargetView?.stopHintAnimation(true)
                 }
 
                 if (touchInsideRight) {
                     rightTargetView?.expandAnimation()
+                    leftTargetView?.stopHintAnimation(true)
                 }
-
-                leftTargetView?.cancelPulseAnimation()
-                rightTargetView?.cancelPulseAnimation()
             }
 
             MotionEvent.ACTION_UP -> {
@@ -67,11 +67,10 @@ class VinHolderLayout(context: Context, attrs: AttributeSet?) : FrameLayout(cont
                     onVinHolderLayoutCallbackLister?.onRightSwiped()
                     return true
                 }
-
-                rightTargetView?.startPulseAnimation()
-                leftTargetView?.startPulseAnimation()
                 leftTargetView?.collapseAnimation()
                 rightTargetView?.collapseAnimation()
+                rightTargetView?.startHintAnimation()
+                leftTargetView?.startHintAnimation()
 
                 if (touchInsideLeft) {
                     onVinHolderLayoutCallbackLister?.onLeftSwiped()

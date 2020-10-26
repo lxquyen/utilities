@@ -1,12 +1,13 @@
 package com.steve.utilities.common.widget
 
 import android.animation.ValueAnimator
+import android.animation.ValueAnimator.REVERSE
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import com.steve.utilities.R
 import com.steve.utilities.common.extensions.dp2Px
@@ -39,10 +40,10 @@ class VinSwipeButtonView(context: Context?, attrs: AttributeSet?) : ImageView(co
     private var circleColor = Color.RED
     private var circleRadius = 0f
     private var circleRadiusMax = 0f
+    private var circleRadiusHint = 0f
 
     private var circleProgressColor = Color.GREEN
     private var circleProgressRadius = 0f
-    private var shouldHideProgress = false
 
     private var targetCircleColor = Color.GREEN
     private var targetPulseRadius = 0
@@ -64,17 +65,14 @@ class VinSwipeButtonView(context: Context?, attrs: AttributeSet?) : ImageView(co
             }
             ?.recycle()
         circleRadiusMax = context.dp2Px(150f)
+        circleRadiusHint = context.dp2Px(55f)
+        circleRadius = context.dp2Px(25f)
         targetPulseRadius = context.dp2Px(40f).toInt()
     }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        pulseAnimation.start()
-    }
-
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        pulseAnimation.cancel()
+        startHintAnimation()
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -84,20 +82,12 @@ class VinSwipeButtonView(context: Context?, attrs: AttributeSet?) : ImageView(co
     }
 
     override fun onDraw(canvas: Canvas?) {
-        if(!shouldHideCircleBackground){
+        if (!shouldHideCircleBackground) {
             drawBackgroundCircle(canvas)
             drawBackgroundCircleProgress(canvas)
-            drawTarget(canvas)
         }
 
         super.onDraw(canvas)
-    }
-
-    private fun drawTarget(canvas: Canvas?) {
-        if (targetCirclePulseAlpha > 0) {
-            targetCirclePulsePaint.alpha = targetCirclePulseAlpha
-            canvas?.drawCircle(centerX, centerY, targetCirclePulseRadius, targetCirclePulsePaint)
-        }
     }
 
     private fun drawBackgroundCircle(canvas: Canvas?) {
@@ -105,8 +95,6 @@ class VinSwipeButtonView(context: Context?, attrs: AttributeSet?) : ImageView(co
     }
 
     private fun drawBackgroundCircleProgress(canvas: Canvas?) {
-        if (shouldHideProgress)
-            return
         canvas?.drawCircle(centerX, centerY, circleProgressRadius, circleProgressPaint)
     }
 
@@ -116,24 +104,26 @@ class VinSwipeButtonView(context: Context?, attrs: AttributeSet?) : ImageView(co
         } else (lerp - threshold) / (1.0f - threshold)
     }
 
-    fun cancelPulseAnimation() {
-        targetCirclePulseRadius = 0f
-        pulseAnimation.cancel()
+    fun stopHintAnimation(shouldHideCircleBackground: Boolean = false) {
+        hintAnimation.cancel()
+        hintProgressAnimation.cancel()
+        this.shouldHideCircleBackground = shouldHideCircleBackground
         invalidate()
     }
 
-    fun startPulseAnimation() {
-        pulseAnimation.start()
+    fun startHintAnimation() {
+        hintAnimation.start()
+        hintProgressAnimation.start()
     }
 
     fun expandAnimation() {
         expandAnimation.start()
+        stopHintAnimation()
     }
 
     fun collapseAnimation() {
-        shouldHideProgress = true
-        expandAnimation.cancel()
-        collapseAnimation.start()
+        shouldHideCircleBackground = false
+        expandAnimation.reverse()
     }
 
     fun setTranslation(xDist: Float, yDist: Float) {
@@ -152,48 +142,40 @@ class VinSwipeButtonView(context: Context?, attrs: AttributeSet?) : ImageView(co
         return circleProgressRadius >= circleRadiusMax - THREAD_HOLD
     }
 
-    fun goneCircle() {
-
-    }
-
-    private val expandAnimation: ValueAnimator = FloatValueAnimatorBuilder()
-        .duration(250)
-        .delayBy(10)
-        .interpolator(AccelerateDecelerateInterpolator())
-        .onUpdate { lerpTime ->
-            val pulseLerp: Float = delayedLerp(lerpTime, 0.5f)
-            circleRadius = pulseLerp * circleRadiusMax
-            invalidate()
+    private val hintAnimation: ValueAnimator = ValueAnimator.ofFloat(0.5f, 1.0f, 0.85f, 1.0f, 0.6f)
+        .apply {
+            duration = 2000
+            repeatCount = -1
+            repeatMode = REVERSE
+            interpolator = LinearInterpolator()
+            addUpdateListener {
+                val value = (it.animatedValue as? Float) ?: 0f
+                circleRadius = value * circleRadiusHint
+                invalidate()
+            }
         }
-        .onEnd {}
-        .build()
 
-    private val collapseAnimation: ValueAnimator = FloatValueAnimatorBuilder()
-        .duration(250)
-        .delayBy(10)
-        .interpolator(AccelerateDecelerateInterpolator())
-        .onUpdate { lerpTime ->
-            val pulseLerp: Float = delayedLerp(lerpTime, 0.5f)
-            val tmp = pulseLerp * circleRadiusMax
-            circleRadius -= tmp
-            invalidate()
+    private val hintProgressAnimation: ValueAnimator = ValueAnimator.ofFloat(0.5f, 0.95f, 0.55f, 0.95f, 0.55f)
+        .apply {
+            duration = 2000
+            repeatCount = -1
+            repeatMode = REVERSE
+            interpolator = LinearInterpolator()
+            addUpdateListener {
+                val value = (it.animatedValue as? Float) ?: 0f
+                circleProgressRadius = value * circleRadiusHint
+                invalidate()
+            }
         }
-        .onEnd {
-            circleProgressRadius = 0f
-            shouldHideProgress = false
-        }
-        .build()
 
-    private val pulseAnimation: ValueAnimator = FloatValueAnimatorBuilder()
-        .duration(1000)
-        .repeat(ValueAnimator.INFINITE)
-        .interpolator(AccelerateDecelerateInterpolator())
-        .onUpdate { lerpTime ->
-            val pulseLerp: Float = delayedLerp(lerpTime, 0.5f)
-            targetCirclePulseRadius = (1.0f + pulseLerp) * 56
-            targetCirclePulseAlpha = ((1.0f - pulseLerp) * 255).toInt()
-            invalidate()
+    private val expandAnimation: ValueAnimator = ValueAnimator.ofFloat(0.5f, 1.0f)
+        .apply {
+            duration = 250
+            interpolator = LinearInterpolator()
+            addUpdateListener {
+                val value = (it.animatedValue as? Float) ?: 0f
+                circleRadius = value * circleRadiusMax
+                invalidate()
+            }
         }
-        .build()
-
 }
