@@ -17,6 +17,7 @@ import com.steve.utilities.R;
 import com.steve.utilities.common.widget.BlurBuilder;
 import com.steve.utilities.common.widget.VinHolderLayout;
 import com.steve.utilities.common.widget.VinSwipeButtonView;
+import com.steve.utilities.common.widget.VinValueAnimator;
 
 public class BlurActivity extends AppCompatActivity implements VinHolderLayout.OnVinHolderLayoutCallbackLister {
 

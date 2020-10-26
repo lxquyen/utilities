@@ -11,6 +11,14 @@
     android:orientation="vertical"
     tools:context=".presentation.BlurActivity">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/countdown" />
+
     <com.steve.utilities.common.widget.VinSwipeButtonView
         android:id="@+id/imgReject"
         android:layout_width="wrap_content"

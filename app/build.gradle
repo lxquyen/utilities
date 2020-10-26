@@ -27,6 +27,7 @@ android {
 }
 
 ext.dagger2_version = "2.25.2"
+ext.lottieVersion = "3.4.4"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -38,5 +39,5 @@ dependencies {
     implementation project(path: ':core-module')
 
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
-
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

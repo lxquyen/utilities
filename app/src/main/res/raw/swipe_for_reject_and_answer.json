@@ -1,0 +1,860 @@
+{
+  "rc_swipe": {
+    "anchorPoint": "MIDDLECENTER",
+    "keyframes": {
+      "x": [
+        {
+          "id": "89cf4a17-4295-4880-a709-f759808ef49e",
+          "ms": 0,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "379cdff0-c3eb-48e0-9f39-e9f43d004424",
+          "ms": 350,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "c2162534-1635-4c6b-91a0-b8c0d2379e5b",
+          "ms": 700,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "c57cd86f-4a95-4e28-8277-eb957818ea14",
+          "ms": 1050,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "dd867563-ce69-49f8-9b9f-74d5b71a5ad0",
+          "ms": 1400,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "bfa8f935-f8f3-4e82-8fb9-5927ac4ef2f3",
+          "ms": 1750,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "60de6db8-0063-47ff-a5fe-0f7277645351",
+          "ms": 2100,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "7982e8dc-4830-4945-9731-74bfb9bc2f8f",
+          "ms": 2483,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "y": [
+        {
+          "id": "8a2a65b1-ca61-4a7c-ac3c-d648183eaaf9",
+          "ms": 0,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "54b3af87-6ef5-43cb-8af8-12e3fcfa4adf",
+          "ms": 350,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "19809b30-879b-4f88-8cad-91f67cdcc7e3",
+          "ms": 700,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "75d890b7-d7e5-4f39-aab5-5aac4ea6ab81",
+          "ms": 1050,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "f0e65b28-69b6-43b2-be5c-6d2e153b5d0c",
+          "ms": 1400,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "99bb0e3f-9f6f-4668-badd-1418c9e684ed",
+          "ms": 1750,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "f65faa51-f1fd-4044-9a3a-05f4b7903dfd",
+          "ms": 2100,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "60f1aa66-ef39-4e9d-90f8-d5ef44668795",
+          "ms": 2483,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "width": [
+        {
+          "id": "5e7ed8cb-6175-4017-80b3-1571dba91094",
+          "ms": 0,
+          "property": "width",
+          "value": 80,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "68af3c3b-ecb9-4561-8d61-53ce1a188e75",
+          "ms": 350,
+          "property": "width",
+          "value": 128,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "d2dfa0b0-bd96-457e-ae9c-0e2ffd24cffc",
+          "ms": 700,
+          "property": "width",
+          "value": 128,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "2622cb98-0651-4aec-ae0f-5c798a1b8544",
+          "ms": 1050,
+          "property": "width",
+          "value": 118,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "3367b33c-3a28-47a4-a3c9-05592cf5207e",
+          "ms": 1400,
+          "property": "width",
+          "value": 128,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "e81e9a96-3396-4a34-ae28-49cb616d7884",
+          "ms": 1750,
+          "property": "width",
+          "value": 128,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "3c5981e6-b5a0-47de-a514-5d5339e6b55f",
+          "ms": 2100,
+          "property": "width",
+          "value": 118,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "73ba0886-762a-4dec-9252-b64de5c515bb",
+          "ms": 2483,
+          "property": "width",
+          "value": 80,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "height": [
+        {
+          "id": "9b59e9f4-9fb1-4731-8c55-3542c12bc966",
+          "ms": 0,
+          "property": "height",
+          "value": 80,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "bfe777fc-9162-4f5d-8ffb-899835b0feb8",
+          "ms": 350,
+          "property": "height",
+          "value": 128,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "5d89dcc5-df8b-41b6-8c52-2d0df8b12b8c",
+          "ms": 700,
+          "property": "height",
+          "value": 128,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "6a97cb15-2bed-4f3e-9da9-e28e18165747",
+          "ms": 1050,
+          "property": "height",
+          "value": 118,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "6978c737-3b8e-41b2-b78f-a3608d390ec7",
+          "ms": 1400,
+          "property": "height",
+          "value": 128,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "6d1e9b8f-e805-4d8c-a0d8-fb7177b9f040",
+          "ms": 1750,
+          "property": "height",
+          "value": 128,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "c81084b6-22ff-45e0-9fd0-87726f2f04c6",
+          "ms": 2100,
+          "property": "height",
+          "value": 118,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "8564d813-cd45-405f-94d5-98338b4e82d7",
+          "ms": 2483,
+          "property": "height",
+          "value": 80,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "rc_swipe_active": {
+    "anchorPoint": "MIDDLECENTER",
+    "keyframes": {
+      "x": [
+        {
+          "id": "ce1cc010-f407-4f4c-9e10-cdd3f9ebc471",
+          "ms": 0,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "b10cd4ee-c9d9-4a88-90fd-113b99080d55",
+          "ms": 350,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "f7991e0c-8dd1-4ae6-892d-fe4d1743c2a8",
+          "ms": 700,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "2dc5254f-ae55-4027-be36-d661c14f0f42",
+          "ms": 1050,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "cec23891-81cf-4c37-8e98-446be5e7e0fe",
+          "ms": 1400,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "d5f8124d-8970-40f6-a2d6-24623a1d00b1",
+          "ms": 1750,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "d90b2b90-2bc5-4306-9780-81c287fc9049",
+          "ms": 2100,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "bf251081-1b67-410c-bf7a-3cbd2b0a1f03",
+          "ms": 2483,
+          "property": "x",
+          "value": 275,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "y": [
+        {
+          "id": "4102c644-4c1f-4c0c-aae6-ebfcafa5115d",
+          "ms": 0,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "981a04e7-7bea-4bc5-9e7e-a90b7bd2045b",
+          "ms": 350,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "4e283db8-9eea-4ec1-a481-257cc09c55ee",
+          "ms": 700,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "57880dd5-494c-4ee2-893f-c64bd3d8fb46",
+          "ms": 1050,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "bd23e992-dddb-404a-bf0d-2b3ca714d0b7",
+          "ms": 1400,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "df56276f-096c-47c5-9b74-a4edb8742c9b",
+          "ms": 1750,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "ab2fbd94-6ba9-4f3f-8429-18983d807253",
+          "ms": 2100,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "adb72e7a-e6f8-4370-bcdb-837a29dd58a3",
+          "ms": 2483,
+          "property": "y",
+          "value": 604,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "width": [
+        {
+          "id": "f348ece9-82b5-48da-b5b2-ba6b1a80b9d3",
+          "ms": 0,
+          "property": "width",
+          "value": 78,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "8a771129-1f61-414b-a7ce-9ee3b49c641a",
+          "ms": 350,
+          "property": "width",
+          "value": 102,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "b0599792-d6a5-43d3-ae4e-66f67796d4bf",
+          "ms": 700,
+          "property": "width",
+          "value": 126,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "2f768c37-0b92-4658-9da9-0268cfb7d98e",
+          "ms": 1050,
+          "property": "width",
+          "value": 84,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "d0a0a74c-07c2-4764-9d08-e4d34138dcfb",
+          "ms": 1400,
+          "property": "width",
+          "value": 102,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "b718d924-122a-40f1-8e0a-2cb0290f0a7d",
+          "ms": 1750,
+          "property": "width",
+          "value": 126,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "fb981e8b-14a1-4f23-a753-b2d28b03b68b",
+          "ms": 2100,
+          "property": "width",
+          "value": 84,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "92e85148-0806-4cc8-b51e-9191e575849d",
+          "ms": 2483,
+          "property": "width",
+          "value": 78,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "height": [
+        {
+          "id": "cd1c537d-58ea-4b49-82e1-3769deec4485",
+          "ms": 0,
+          "property": "height",
+          "value": 78,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "046d8104-be55-4dfa-82ae-f983e075db43",
+          "ms": 350,
+          "property": "height",
+          "value": 102,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "61cbfc79-5d5d-40a9-aa1f-453b171c293e",
+          "ms": 700,
+          "property": "height",
+          "value": 126,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "72f22fbd-2057-4f0c-bf71-d951b910eac0",
+          "ms": 1050,
+          "property": "height",
+          "value": 84,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "7a8a63e8-2b82-4510-9b68-757a3b6a4064",
+          "ms": 1400,
+          "property": "height",
+          "value": 102,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "de2b8b75-2b27-4e63-afe0-8d99fb33263a",
+          "ms": 1750,
+          "property": "height",
+          "value": 126,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "a6dc7549-9c10-4f7a-a755-844f6af60b79",
+          "ms": 2100,
+          "property": "height",
+          "value": 84,
+          "easing": "linear",
+          "easingCurve": [
+            0.42,
+            0,
+            0.58,
+            1
+          ]
+        },
+        {
+          "id": "403ce454-ef8d-4fe5-a1c8-4c614bc72def",
+          "ms": 2483,
+          "property": "height",
+          "value": 78,
+          "easing": "linear",
+          "easingCurve": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  }
+}

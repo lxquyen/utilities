@@ -11,6 +11,7 @@ import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import com.steve.utilities.R
 import com.steve.utilities.common.extensions.dp2Px
+import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -142,31 +143,34 @@ class VinSwipeButtonView(context: Context?, attrs: AttributeSet?) : ImageView(co
         return circleProgressRadius >= circleRadiusMax - THREAD_HOLD
     }
 
-    private val hintAnimation: ValueAnimator = ValueAnimator.ofFloat(0.5f, 1.0f, 0.85f, 1.0f, 0.6f)
-        .apply {
-            duration = 2000
-            repeatCount = -1
-            repeatMode = REVERSE
-            interpolator = LinearInterpolator()
-            addUpdateListener {
-                val value = (it.animatedValue as? Float) ?: 0f
-                circleRadius = value * circleRadiusHint
-                invalidate()
-            }
-        }
+/*
 
-    private val hintProgressAnimation: ValueAnimator = ValueAnimator.ofFloat(0.5f, 0.95f, 0.55f, 0.95f, 0.55f)
-        .apply {
-            duration = 2000
-            repeatCount = -1
-            repeatMode = REVERSE
-            interpolator = LinearInterpolator()
-            addUpdateListener {
-                val value = (it.animatedValue as? Float) ?: 0f
-                circleProgressRadius = value * circleRadiusHint
-                invalidate()
-            }
-        }
+//    private val hintAnimation: ValueAnimator = ValueAnimator.ofFloat(0.5f, 1.0f, 0.85f, 1.0f, 0.6f)
+//        .apply {
+//            duration = 2000
+//            repeatCount = -1
+//            repeatMode = REVERSE
+//            interpolator = LinearInterpolator()
+//            addUpdateListener {
+//                val value = (it.animatedValue as? Float) ?: 0f
+//                circleRadius = value * circleRadiusHint
+//                invalidate()
+//            }
+//        }
+
+//    private val hintProgressAnimation: ValueAnimator = ValueAnimator.ofFloat(0.5f, 0.95f, 0.55f, 0.95f, 0.55f)
+//        .apply {
+//            duration = 2000
+//            repeatCount = -1
+//            repeatMode = REVERSE
+//            interpolator = LinearInterpolator()
+//            addUpdateListener {
+//                val value = (it.animatedValue as? Float) ?: 0f
+//                circleProgressRadius = value * circleRadiusHint
+//                invalidate()
+//            }
+//        }
+*/
 
     private val expandAnimation: ValueAnimator = ValueAnimator.ofFloat(0.5f, 1.0f)
         .apply {
@@ -175,6 +179,39 @@ class VinSwipeButtonView(context: Context?, attrs: AttributeSet?) : ImageView(co
             addUpdateListener {
                 val value = (it.animatedValue as? Float) ?: 0f
                 circleRadius = value * circleRadiusMax
+                invalidate()
+            }
+        }
+
+    private val hintAnimation = VinValueAnimator(context)
+        .apply {
+            addAnimator(80f, 128f, 350 - 0)
+            addAnimator(128f, 128f, 700 - 350)
+            addAnimator(128f, 118f, 1050 - 700)
+            addAnimator(118f, 128f, 1400 - 1050)
+            addAnimator(128f, 128f, 1750 - 1400)
+            addAnimator(128f, 118f, 2100 - 1750)
+            addAnimator(118f, 80f, 2483 - 2100)
+            updateValueListener = {
+                val radius = it / 2f
+                circleRadius = radius
+                invalidate()
+            }
+        }
+
+    private val hintProgressAnimation = VinValueAnimator(context)
+        .apply {
+            addAnimator(78f, 102f, 350 - 0)
+            addAnimator(102f, 126f, 700 - 350)
+            addAnimator(126f, 84f, 1050 - 700)
+            addAnimator(84f, 102f, 1400 - 1050)
+            addAnimator(102f, 126f, 1750 - 1400)
+            addAnimator(126f, 84f, 2100 - 1750)
+            addAnimator(84f, 78f, 2483 - 2100)
+
+            updateValueListener = {
+                val radius = it / 2f
+                circleProgressRadius = radius
                 invalidate()
             }
         }
