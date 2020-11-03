@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.steve.utilities.R
 import com.steve.utilities.common.extensions.createNotificationChannel
 import com.steve.utilities.presentation.MainActivity
@@ -56,6 +57,7 @@ class MyService : Service() {
             .setCategory(Notification.CATEGORY_CALL)
             .setFullScreenIntent(pendingIntent, true)
             .setPriority(NotificationManager.IMPORTANCE_MAX)
+        NotificationManagerCompat.from(this).notify(1, builder.build())
         startForeground(1, builder.build())
     }
 

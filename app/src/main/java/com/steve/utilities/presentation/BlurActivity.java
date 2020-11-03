@@ -2,6 +2,8 @@ package com.steve.utilities.presentation;
 
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
